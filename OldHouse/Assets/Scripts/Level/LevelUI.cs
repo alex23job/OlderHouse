@@ -30,4 +30,14 @@ public class LevelUI : MonoBehaviour
     {
         _hintPanel.SetActive(false);
     }
+
+    public void LoadMainScene()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
+
+    public void LoadMiniGameScene(string nameScene)
+    {
+        SceneManager.LoadScene(nameScene);
+    }
 }

@@ -14,18 +14,7 @@ public class MyOutLine : MonoBehaviour
         print($"_mr={_mr}");
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    private void OnMouseEnter()
+    public void ViewOutLine()
     {
         print($"OnMouseEnter");
         if (_mr != null)
@@ -41,7 +30,7 @@ public class MyOutLine : MonoBehaviour
         }
     }
 
-    private void OnMouseExit()
+    public void HideOutLine()
     {
         print($"OnMouseExit");
         if (_mr != null)
