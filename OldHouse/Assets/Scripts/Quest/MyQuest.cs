@@ -68,6 +68,20 @@ public class MyQuest
                 QuestObject qo = obj.GetComponent<QuestObject>();
                 if (qo != null) { qo.SetQuestFaza(_faza); }
                 _questObjects[i] = obj;
+                Debug.Log($"i={i}  name={obj.name} qo=<{qo}>");
+            }
+        }
+    }
+
+    public void UpdateFaza(QuestFaza questFaza)
+    {
+        _faza = questFaza;
+        foreach(GameObject go in _questObjects)
+        {
+            if (go != null)
+            {
+                QuestObject qo = go.GetComponent<QuestObject>();
+                if (qo != null) { qo.SetQuestFaza(_faza); }
             }
         }
     }

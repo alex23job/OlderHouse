@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class LevelControl : MonoBehaviour
@@ -26,7 +27,7 @@ public class LevelControl : MonoBehaviour
     {
         _questList.Clear();
         _questList.Add(new MyQuest(1, "Странный замок", "На этот замок закрыта дверь из старого дома. Нужно найти 4 ключа, вставить их в замок и повернуть ключ, чтобы разблокировать выходную дверь", QuestFaza.NotAvailable, new int[] { 1, 2, 3, 4, 5}));
-        _questList.Add(new MyQuest(2, "Шкатулка с секретом", "Возможно в шкатулке лежит что-то важное. Сыграйте в игру, чтобы открыть шкатулку и взять её содержимое.", QuestFaza.NotAvailable, new int[] { 6, 1 }));
+        _questList.Add(new MyQuest(2, "Шкатулка с секретом", "Возможно в шкатулке лежит что-то важное. Сыграйте в игру, чтобы открыть шкатулку и взять её содержимое.", QuestFaza.NotAvailable, new int[] { 6, 2 }));
         _questList.Add(new MyQuest(3, "Сейф с кодовым замком", "В сейфе однозначно есть что-то интересное. Введите код, откройте сейф и заберите то, что внутри", QuestFaza.NotAvailable, new int[] { 8, 7, 9 }));
     }
 
@@ -34,7 +35,60 @@ public class LevelControl : MonoBehaviour
     {
         if (_setQuestObjects != null)
         {
-
+            if (_questList.Count > 0)
+            {
+                foreach(var item in _questList)
+                {
+                    item.SetQuestObjects(_setQuestObjects);
+                }
+                if (GameManager.Instance.currentPlayer.questStatus != "")
+                {
+                    string[] ar = GameManager.Instance.currentPlayer.questStatus.Split('#', System.StringSplitOptions.RemoveEmptyEntries);
+                    if (ar.Length > 0)
+                    {
+                        for (int i = 0; i < ar.Length; i++)
+                        {
+                            _questList[i].LoadProcessing(ar[i]);
+                            //_questList[i].SetQuestObjects(_setQuestObjects);
+                        }
+                    }
+                }
+            }
         }
+    }
+
+    public void LevelExit()
+    {
+        GameManager.Instance.currentPlayer.questStatus = ListQuestsToCsv();
+        _levelUI.LoadMainScene();
+    }
+
+    private string ListQuestsToCsv(char sep = '#')
+    {
+        StringBuilder sb = new StringBuilder();
+        if (_questList.Count > 0)
+        {
+            foreach (var quest in _questList)
+            {
+                sb.Append($"{quest.SaveProcessingToCsv()}{sep}");
+            }
+        }
+        return sb.ToString();
+    }
+
+    public bool ChangeFazaQuest(QuestStatus qs)
+    {
+        foreach(var quest in _questList)
+        {
+            if (quest.Id == qs.QuestID)
+            {
+                if (quest.Faza < qs.Faza)
+                {
+                    quest.UpdateFaza(qs.Faza);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

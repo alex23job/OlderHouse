@@ -11,12 +11,12 @@ public class MyOutLine : MonoBehaviour
     private void Awake()
     {
         _mr = GetComponent<MeshRenderer>();
-        print($"_mr={_mr}");
+        //print($"_mr={_mr}");
     }
 
     public void ViewOutLine()
     {
-        print($"OnMouseEnter");
+        //print($"OnMouseEnter");
         if (_mr != null)
         {
             Material[] mats = _mr.materials;
@@ -32,7 +32,7 @@ public class MyOutLine : MonoBehaviour
 
     public void HideOutLine()
     {
-        print($"OnMouseExit");
+        //print($"OnMouseExit");
         if (_mr != null)
         {
             Material[] mats = _mr.materials;

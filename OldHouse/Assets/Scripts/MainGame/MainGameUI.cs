@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class MainGameUI : MonoBehaviour
 {
+    [SerializeField] private Text _txtDebug;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,6 +25,11 @@ public class MainGameUI : MonoBehaviour
 
     public void ExitGame()
     {
+        GameManager.Instance.SaveGame();
         Application.Quit();
+    }
+    public void ViewDebug(string str)
+    {
+        if (_txtDebug != null) _txtDebug.text = str;
     }
 }
