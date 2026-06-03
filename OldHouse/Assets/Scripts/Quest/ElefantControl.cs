@@ -38,6 +38,11 @@ public class ElefantControl : MonoBehaviour, IInteract
         return _hint;
     }
 
+    public void TurnElefant()
+    {
+        transform.Rotate(new Vector3(0, 180f, 0), Space.World);
+    }
+
     private void OnMouseUp()
     {
         transform.Rotate(new Vector3(0, 180f, 0), Space.World);

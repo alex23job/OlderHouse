@@ -8,6 +8,7 @@ public class SecretDoor : MonoBehaviour
     private SecretDoor _secretDoor;
     private Animator _anim;
     private int _code;
+    private int _codeEtalon = 0x7f;
 
     private void Awake()
     {
@@ -20,14 +21,19 @@ public class SecretDoor : MonoBehaviour
     {
         if (_figure != null && _figure.Length > 0)
         {
+            int startPos = Random.Range(0, 127);
             foreach (var figure in _figure)
             {
                 ElefantControl ef = figure.GetComponentInChildren<ElefantControl>();
                 if (ef != null)
                 {
                     ef.SetParams(_levelUI, _secretDoor);
+                    if ((startPos & (1 << ef.ID)) > 0) ef.TurnElefant();
                 }
             }
+            _code = startPos;
+            int rnd = Random.Range(0, 2);
+            if (rnd > 0) _codeEtalon = 0;
         }
     }
 
@@ -44,7 +50,7 @@ public class SecretDoor : MonoBehaviour
             int[] mask = new int[7] { 0xfe, 0xfd, 0xfb, 0xf7, 0xef, 0xdf, 0xbf};
             _code = (_code & mask[id]) + (state << id);
         }
-        if (_code == 0x7f)
+        if (_code == _codeEtalon)
         {
             _anim.SetBool("IsOpen", true);
         }
