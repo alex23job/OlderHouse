@@ -23,9 +23,10 @@ public class CasketControl : MonoBehaviour, IMyCommand
         {
             SceneManager.LoadScene(_sceneMiniGame);
         }
-        if (_questObject.Faza == QuestFaza.Processing)
+        if (_questObject.Faza >= QuestFaza.Processing)
         {
             _animator.SetBool("IsOpen", true);
+            _questObject.SetQuestFaza(QuestFaza.Completed);
         }
     }
 

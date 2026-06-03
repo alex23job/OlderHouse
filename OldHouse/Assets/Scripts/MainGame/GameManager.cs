@@ -200,7 +200,7 @@ public class PlayerInfo
 
     public IMyCommand myCommand = null;
     public QuestResult questResult = null;
-    //public Inventory inventory;
+    public Inventory inventory;
 
     public int countSecond = 0;
     public int countLine = 0;
@@ -226,7 +226,10 @@ public class PlayerInfo
     {
         maxLevel = 1;
         currentLevel = 1;
-        //inventory = new Inventory();
+        inventory = new Inventory();
+        questStatus = "";
+        oldPosition = Vector3.zero;
+        oldRotation = Vector3.zero;
     }
 
     public static PlayerInfo FirstGame()

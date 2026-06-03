@@ -10,6 +10,7 @@ public class QuestObject : MonoBehaviour, IInteract
 
     private QuestFaza _questFaza;
     private MyOutLine _outLine;
+    private MyQuest _mainQuest;
 
     public QuestFaza Faza => _questFaza;
 
@@ -76,5 +77,15 @@ public class QuestObject : MonoBehaviour, IInteract
     public void SetQuestFaza(QuestFaza questFaza)
     {
         _questFaza = questFaza;
+    }
+
+    public void SetMyQuest(MyQuest quest)
+    {
+        _mainQuest = quest;
+    }
+
+    public void TestMainQuest()
+    {
+        if (_mainQuest != null) _mainQuest.TestCompleted();
     }
 }

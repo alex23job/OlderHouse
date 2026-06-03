@@ -1,3 +1,4 @@
+using Assets.Scripts.Level;
 using System;
 using System.Text;
 using UnityEngine;
@@ -76,19 +77,35 @@ public class MyQuest
 
     public void UpdateFaza(QuestFaza questFaza)
     {
+        int count = 0;
         _faza = questFaza;
         foreach(GameObject go in _questObjects)
         {
             if (go != null)
             {
+                count++;
                 QuestObject qo = go.GetComponent<QuestObject>();
                 if (qo != null) 
                 { 
                     qo.SetQuestFaza(_faza);
                     Debug.Log($"name={go.name} qo=<{qo}> faza={_faza}");
+                    if (qo.Faza >= QuestFaza.Processing)
+                    {
+                        IMyCommand myCommand = go.GetComponent<IMyCommand>();
+                        if (myCommand != null)
+                        {
+                            myCommand.Execute();
+                        }
+                    }
                 }
             }
         }
+        Debug.Log($"QUEST {_name} : nums={_arrIdObjects.Length}  go={_questObjects.Length} notNull={count}");
+    }
+
+    public void TestCompleted()
+    {
+
     }
 }
 
