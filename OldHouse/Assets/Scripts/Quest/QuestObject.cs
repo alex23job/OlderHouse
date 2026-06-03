@@ -1,5 +1,6 @@
 using UnityEngine;
 using Assets.Scripts.Interact;
+using Assets.Scripts.Level;
 
 public class QuestObject : MonoBehaviour, IInteract
 {
@@ -9,6 +10,8 @@ public class QuestObject : MonoBehaviour, IInteract
 
     private QuestFaza _questFaza;
     private MyOutLine _outLine;
+
+    public QuestFaza Faza => _questFaza;
 
     public int ID => _id;
 
@@ -52,7 +55,9 @@ public class QuestObject : MonoBehaviour, IInteract
         {
             _levelUI.ViewHint(GetHint());
         }
-
+        IMyCommand imc = GetComponent<IMyCommand>();
+        print($"IMyCommand = <{imc}>");
+        GameManager.Instance.currentPlayer.myCommand = GetComponent<IMyCommand>();
     }
 
     private void OnMouseExit()
@@ -65,6 +70,7 @@ public class QuestObject : MonoBehaviour, IInteract
         {
             _levelUI.HideHint();
         }
+        GameManager.Instance.currentPlayer.myCommand = null;
     }
 
     public void SetQuestFaza(QuestFaza questFaza)

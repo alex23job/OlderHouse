@@ -45,7 +45,8 @@ public class MyQuest
             }
             if (Enum.TryParse(ar[1], out QuestFaza result))
             {
-                _faza = result;
+                //_faza = result;
+                UpdateFaza(result);
             }
         }
     }
@@ -68,7 +69,7 @@ public class MyQuest
                 QuestObject qo = obj.GetComponent<QuestObject>();
                 if (qo != null) { qo.SetQuestFaza(_faza); }
                 _questObjects[i] = obj;
-                Debug.Log($"i={i}  name={obj.name} qo=<{qo}>");
+                //Debug.Log($"i={i}  name={obj.name} qo=<{qo}>");
             }
         }
     }
@@ -81,8 +82,26 @@ public class MyQuest
             if (go != null)
             {
                 QuestObject qo = go.GetComponent<QuestObject>();
-                if (qo != null) { qo.SetQuestFaza(_faza); }
+                if (qo != null) 
+                { 
+                    qo.SetQuestFaza(_faza);
+                    Debug.Log($"name={go.name} qo=<{qo}> faza={_faza}");
+                }
             }
         }
+    }
+}
+
+[Serializable]
+public class QuestResult
+{
+    public int QuestID;
+    public QuestFaza Faza;
+
+    public QuestResult() { }
+    public QuestResult(int questID, QuestFaza faza)
+    {
+        QuestID = questID;
+        Faza = faza;
     }
 }

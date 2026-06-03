@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
+using Assets.Scripts.Level;
 
 public class GameManager : MonoBehaviour
 {
@@ -196,6 +197,9 @@ public class PlayerInfo
     public Vector3 oldRotation = Vector3.zero;
 
     public string questStatus = "";
+
+    public IMyCommand myCommand = null;
+    public QuestResult questResult = null;
     //public Inventory inventory;
 
     public int countSecond = 0;

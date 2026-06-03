@@ -7,6 +7,7 @@ public class LevelControl : MonoBehaviour
 {
     [SerializeField] private LevelUI _levelUI;
     [SerializeField] private SetQuestObjects _setQuestObjects;
+    [SerializeField] private GameObject _player;
 
     private List<MyQuest> _questList = new List<MyQuest>();
 
@@ -14,6 +15,7 @@ public class LevelControl : MonoBehaviour
     void Start()
     {
         CreateMyQuestList();
+        Invoke("LoadPlayerPosition", 0.2f);
         Invoke("BuildQuestList", 0.5f);
     }
 
@@ -21,6 +23,14 @@ public class LevelControl : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void LoadPlayerPosition()
+    {
+        Vector3 delta = Vector3.zero - GameManager.Instance.currentPlayer.oldPosition;
+        if (delta.magnitude < 0.1f) return;
+        _player.transform.position = GameManager.Instance.currentPlayer.oldPosition;
+        _player.transform.rotation = Quaternion.Euler(GameManager.Instance.currentPlayer.oldRotation);
     }
 
     private void CreateMyQuestList()
@@ -55,11 +65,28 @@ public class LevelControl : MonoBehaviour
                 }
             }
         }
+        if (_questList.Count > 0 && GameManager.Instance.currentPlayer.questResult != null)
+        {
+            QuestResult qr = GameManager.Instance.currentPlayer.questResult;
+            foreach (var item in _questList)
+            {
+                if (item.Id == qr.QuestID)
+                {
+                    item.UpdateFaza(qr.Faza);
+                    GameManager.Instance.currentPlayer.questStatus = ListQuestsToCsv();
+                    break;
+                }
+            }
+
+        }
     }
 
     public void LevelExit()
     {
+        GameManager.Instance.currentPlayer.oldPosition = _player.transform.position;
+        GameManager.Instance.currentPlayer.oldRotation = _player.transform.rotation.eulerAngles;
         GameManager.Instance.currentPlayer.questStatus = ListQuestsToCsv();
+        GameManager.Instance.SaveGame();
         _levelUI.LoadMainScene();
     }
 

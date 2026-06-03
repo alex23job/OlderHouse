@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
@@ -45,6 +46,17 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             _switchCamera.CameraSwitch();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (GameManager.Instance.currentPlayer.myCommand != null)
+            {
+
+                GameManager.Instance.currentPlayer.oldPosition = transform.position;
+                GameManager.Instance.currentPlayer.oldRotation = transform.rotation.eulerAngles;
+                GameManager.Instance.SaveGame();
+                GameManager.Instance.currentPlayer.myCommand.Execute();
+            }
         }
         if (_timer > 0) { _timer -= Time.deltaTime; }
         else
@@ -116,4 +128,8 @@ public class PlayerMovement : MonoBehaviour
         return Physics.CheckSphere(transform.position, 0.1f, ~0, QueryTriggerInteraction.Ignore);
     }
 
+    public void SetQuestObject()
+    {
+
+    }
 }
