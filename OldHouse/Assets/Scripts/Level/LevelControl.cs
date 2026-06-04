@@ -36,7 +36,7 @@ public class LevelControl : MonoBehaviour
     private void CreateMyQuestList()
     {
         _questList.Clear();
-        _questList.Add(new MyQuest(1, "Странный замок", "На этот замок закрыта дверь из старого дома. Нужно найти 4 ключа, вставить их в замок и повернуть ключ, чтобы разблокировать выходную дверь", QuestFaza.NotAvailable, new int[] { 1, 2, 3, 4, 5}));
+        _questList.Add(new MyQuest(1, "Странный замок", "На этот замок закрыта дверь из старого дома. Нужно найти 4 ключа, вставить их в замок и повернуть ключ, чтобы разблокировать выходную дверь", QuestFaza.NotAvailable, new int[] { 1, 9, 10, 11, 12}));
         _questList.Add(new MyQuest(2, "Шкатулка с секретом", "Возможно в шкатулке лежит что-то важное. Сыграйте в игру, чтобы открыть шкатулку и взять её содержимое.", QuestFaza.NotAvailable, new int[] { 6, 2 }));
         _questList.Add(new MyQuest(3, "Сейф с кодовым замком", "В сейфе однозначно есть что-то интересное. Введите код, откройте сейф и заберите то, что внутри", QuestFaza.NotAvailable, new int[] { 8, 7 }));
     }
