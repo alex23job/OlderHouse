@@ -5,6 +5,7 @@ public class SwitchCamera : MonoBehaviour
 {
     [SerializeField] private Camera cameraFPS;
     [SerializeField] private Camera cameraTPS;
+    [SerializeField] private bool _isFirstISO = true;
 
     private bool _isFPS = false;
 
@@ -15,6 +16,7 @@ public class SwitchCamera : MonoBehaviour
         cameraTPS.gameObject.SetActive(true);
         IsoCameraFollower isoCamera = cameraTPS.gameObject.GetComponent<IsoCameraFollower>();
         if (isoCamera != null) isoCamera.SetUsed(true);
+        if (_isFirstISO == false) Invoke("CameraSwitch", 1f);
     }
 
     public void CameraSwitch()

@@ -36,9 +36,10 @@ public class LevelControl : MonoBehaviour
     private void CreateMyQuestList()
     {
         _questList.Clear();
-        _questList.Add(new MyQuest(1, "Странный замок", "На этот замок закрыта дверь из старого дома. Нужно найти 4 ключа, вставить их в замок и повернуть ключ, чтобы разблокировать выходную дверь", QuestFaza.NotAvailable, new int[] { 1, 9, 10, 11, 12}));
+        _questList.Add(new MyQuest(1, "Странный замок", "На этот замок закрыта дверь из старого дома. Нужно найти 4 ключа, вставить их в замок и повернуть ключ, чтобы разблокировать выходную дверь", QuestFaza.NotAvailable, new int[] { 1, 3, 4, 5, 9, 10, 11, 12}));
         _questList.Add(new MyQuest(2, "Шкатулка с секретом", "Возможно в шкатулке лежит что-то важное. Сыграйте в игру, чтобы открыть шкатулку и взять её содержимое.", QuestFaza.NotAvailable, new int[] { 6, 2 }));
         _questList.Add(new MyQuest(3, "Сейф с кодовым замком", "В сейфе однозначно есть что-то интересное. Введите код, откройте сейф и заберите то, что внутри", QuestFaza.NotAvailable, new int[] { 8, 7 }));
+        _questList.Add(new MyQuest(4, "Закрытая тумбочка", "Возможно, в тумбочке лежит что-то интересное. Иначе зачемеё запирать. Найдите ключик, откройте тумбочку чтобы посмотреть то, что внутри", QuestFaza.NotAvailable, new int[] { 32, 31 }));
     }
 
     private void BuildQuestList()
@@ -112,6 +113,7 @@ public class LevelControl : MonoBehaviour
                 if (quest.Faza < qs.Faza)
                 {
                     quest.UpdateFaza(qs.Faza);
+                    GameManager.Instance.SaveGame();
                     return true;
                 }
             }

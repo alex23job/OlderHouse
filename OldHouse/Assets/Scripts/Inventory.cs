@@ -33,6 +33,15 @@ public class Inventory
         return items.ToArray();
     }
 
+    public bool CheckItemByID(int id)
+    {
+        foreach (InventoryTail item in items)
+        {
+            if (item.Id == id) return true;
+        }
+        return false;
+    }
+
     public string ToCsvString(char sep = '#')
     {
         StringBuilder sb = new StringBuilder();

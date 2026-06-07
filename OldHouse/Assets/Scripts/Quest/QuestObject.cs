@@ -88,4 +88,14 @@ public class QuestObject : MonoBehaviour, IInteract
     {
         if (_mainQuest != null) _mainQuest.TestCompleted();
     }
+
+    public GameObject[] GetArrObjects()
+    {
+        return _mainQuest.GetArrObjects();
+    }
+
+    public void PlayEffect(int numClip)
+    {
+        _levelUI.PlayEffect(numClip);
+    }
 }

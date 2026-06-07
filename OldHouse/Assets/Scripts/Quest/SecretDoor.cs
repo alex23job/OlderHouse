@@ -4,6 +4,7 @@ public class SecretDoor : MonoBehaviour
 {
     [SerializeField] private GameObject[] _figure;
     [SerializeField] private LevelUI _levelUI;
+    [SerializeField] private int _doorID;
 
     private SecretDoor _secretDoor;
     private Animator _anim;
@@ -35,12 +36,7 @@ public class SecretDoor : MonoBehaviour
             int rnd = Random.Range(0, 2);
             if (rnd > 0) _codeEtalon = 0;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if ((GameManager.Instance.currentPlayer.totalGold & _doorID) > 0) _anim.SetBool("IsOpen", true);
     }
 
     public void SendFigureState(int id, int state)
@@ -53,6 +49,9 @@ public class SecretDoor : MonoBehaviour
         if (_code == _codeEtalon)
         {
             _anim.SetBool("IsOpen", true);
+            GameManager.Instance.currentPlayer.totalGold |= _doorID;
+            GameManager.Instance.SaveGame();
+            _levelUI.PlayEffect(1);
         }
     }
 }

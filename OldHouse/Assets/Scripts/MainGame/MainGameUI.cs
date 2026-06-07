@@ -22,8 +22,8 @@ public class MainGameUI : MonoBehaviour
         {
             _playSounds.SetVolume(GameManager.Instance.currentPlayer.volumeFone);
             if (GameManager.Instance.currentPlayer.isSoundFone == false) _playSounds.PauseSounds();
-        }
-        _playSounds.PlayClip(0);
+            else _playSounds.PlayClip(0);
+        }        
     }
 
     // Update is called once per frame
@@ -34,6 +34,7 @@ public class MainGameUI : MonoBehaviour
 
     public void LoadHouseScene()
     {
+        _playSounds.PauseSounds();
         SceneManager.LoadScene("HouseScene");
     }
 

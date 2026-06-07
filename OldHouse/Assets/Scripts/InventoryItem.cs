@@ -26,8 +26,14 @@ public class InventoryItem : MonoBehaviour, IMyCommand
             {
                 _questObject.SetQuestFaza(QuestFaza.Completed);
                 _questObject.TestMainQuest();
+                _questObject.PlayEffect(2);
             }
             GameManager.Instance.currentPlayer.inventory.AddTail(_id, _name, _descr, _numSprite);
         }
+    }
+
+    private void Start()
+    {
+        if (GameManager.Instance.currentPlayer.inventory.CheckItemByID(_id)) gameObject.SetActive(false);
     }
 }

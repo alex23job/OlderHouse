@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.currentPlayer.totalGold = data.gold;
         GameManager.Instance.currentPlayer.nameOldScene = data.scene;
         GameManager.Instance.currentPlayer.CsvToPosAndRot(data.posAndRot);
-        //GameManager.Instance.currentPlayer.inventory = new Inventory(data.csvInventory);
+        GameManager.Instance.currentPlayer.inventory = new Inventory(data.csvInventory);
         GameManager.Instance.currentPlayer.questStatus = data.csvQuest;
         if (data.scene == "") GameManager.Instance.currentPlayer.nameOldScene = "1111111111111111111111111111111111111111";
 
@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
 
         //Debug.Log("Game data loaded! Score=" + GameManager.Instance.currentPlayer.totalScore.ToString() + "  Gold=" + GameManager.Instance.currentPlayer.totalGold.ToString());
         //Debug.Log($"Game data loaded! Score={GameManager.Instance.currentPlayer.totalScore}  Gold={GameManager.Instance.currentPlayer.totalGold}  warriorsStr=<{data.csvWarriors}>");
-        Debug.Log($"Game data loaded! Score={GameManager.Instance.currentPlayer.totalScore}  Gold={GameManager.Instance.currentPlayer.totalGold}");
+        Debug.Log($"Game data loaded! Score={GameManager.Instance.currentPlayer.totalScore}  Gold={GameManager.Instance.currentPlayer.totalGold} QuestStatus={GameManager.Instance.currentPlayer.questStatus}");
         //Debug.Log($"Game data loaded! Score={GameManager.Instance.currentPlayer.totalScore} Pos={GameManager.Instance.currentPlayer.oldPosition}");
 
         if (mm_control != null)
@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
 
         //data.csvGarage = PlayersGarage.Instance.GarageToCsvString();
         //data.csvGarage = PlayersGarage.Instance.PassportsToCsvString();
-        //data.csvInventory = GameManager.Instance.currentPlayer.inventory.ToCsvString();
+        data.csvInventory = GameManager.Instance.currentPlayer.inventory.ToCsvString();
         data.csvQuest = GameManager.Instance.currentPlayer.questStatus;
 
 
@@ -181,7 +181,7 @@ public class PlayerInfo
     public int totalScore = 0;
     public int sessionScore = 0;
     public int currentScore = 0;
-    public int totalGold = 0;
+    public int totalGold = 0;   //  храним состояние открытости дверей: 0 бит - InputDoor, 1 бит - SecretDoorL, 2 бит - SecretDoorR, 3 бит - OutDoor
     public int sessionGold = 0;
     public int maxLevel = 1;
     public int currentLevel = 1;
