@@ -48,10 +48,6 @@ public class LevelControl : MonoBehaviour
         {
             if (_questList.Count > 0)
             {
-                foreach(var item in _questList)
-                {
-                    item.SetQuestObjects(_setQuestObjects);
-                }
                 if (GameManager.Instance.currentPlayer.questStatus != "")
                 {
                     string[] ar = GameManager.Instance.currentPlayer.questStatus.Split('#', System.StringSplitOptions.RemoveEmptyEntries);
@@ -63,6 +59,10 @@ public class LevelControl : MonoBehaviour
                             //_questList[i].SetQuestObjects(_setQuestObjects);
                         }
                     }
+                }
+                foreach(var item in _questList)
+                {
+                    item.SetQuestObjects(_setQuestObjects);
                 }
             }
         }

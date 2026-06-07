@@ -51,8 +51,8 @@ public class MyQuest
             }
             if (Enum.TryParse(ar[1], out QuestFaza result))
             {
-                //_faza = result;
-                UpdateFaza(result);
+                _faza = result;
+                //UpdateFaza(result);
             }
             if (ar.Length >= 3)
             {
@@ -83,6 +83,7 @@ public class MyQuest
                 tmp |= zn << (2 * i);
             }
         }
+        _questObjectsFaza = tmp;
         StringBuilder sb = new StringBuilder($"{_id}{sep}{_faza}{sep}{_questObjectsFaza}{sep}");
 
         return sb.ToString();
@@ -132,7 +133,7 @@ public class MyQuest
                 { 
                     qo.SetQuestFaza(_faza);
                     //Debug.Log($"name={go.name} qo=<{qo}> faza={_faza}");
-                    if (qo.Faza >= QuestFaza.Processing)
+                    if (qo.Faza > QuestFaza.Processing)
                     {
                         IMyCommand myCommand = go.GetComponent<IMyCommand>();
                         if (myCommand != null)

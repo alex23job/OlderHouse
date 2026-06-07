@@ -24,7 +24,10 @@ public class QuestObject : MonoBehaviour, IInteract
             case QuestFaza.NotAvailable: res = _hint[0]; break;
             case QuestFaza.Available: if (_hint.Length > 1) res = _hint[1]; break;
             case QuestFaza.Processing: if (_hint.Length > 2) res = _hint[2]; break;
-            case QuestFaza.Completed: if (_hint.Length > 3) res = _hint[3]; break;
+            case QuestFaza.Completed: if (_hint.Length > 3) res = _hint[3];
+                IMyCommand myCommand = gameObject.GetComponent<IMyCommand>();
+                if (myCommand != null) myCommand.Execute();
+                break;
         }
         return res;
     }
@@ -76,7 +79,7 @@ public class QuestObject : MonoBehaviour, IInteract
 
     public void SetQuestFaza(QuestFaza questFaza)
     {
-        _questFaza = questFaza;
+        if (_questFaza < questFaza) _questFaza = questFaza;
     }
 
     public void SetMyQuest(MyQuest quest)
