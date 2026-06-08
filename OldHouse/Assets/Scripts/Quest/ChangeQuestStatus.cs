@@ -26,6 +26,16 @@ public class ChangeQuestStatus : MonoBehaviour
             {
                 item.IsComplete = _levelControl.ChangeFazaQuest(item);
             }
+            Invoke("HideTrigger", 1f);
+        }
+    }
+
+    private void HideTrigger()
+    {
+        BoxCollider bc = GetComponent<BoxCollider>();
+        if (bc != null)
+        {
+            bc.enabled = false;
         }
     }
 }

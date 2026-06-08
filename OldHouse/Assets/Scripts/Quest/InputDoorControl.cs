@@ -18,6 +18,7 @@ public class InputDoorControl : MonoBehaviour, IMyCommand
         {
             GameManager.Instance.currentPlayer.totalGold |= 1;  //  установили флаг, что дверь закрыта
             _levelUI.PlayEffect(0);
+            _levelUI.ViewHint("Итак, я внутри. Но что это хлопнуло? Входная дверь закрыта намертво! А всё казалось так просто ...");
         }
     }
 

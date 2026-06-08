@@ -28,7 +28,11 @@ public class LevelControl : MonoBehaviour
     private void LoadPlayerPosition()
     {
         Vector3 delta = Vector3.zero - GameManager.Instance.currentPlayer.oldPosition;
-        if (delta.magnitude < 0.1f) return;
+        if (delta.magnitude < 0.1f)
+        {
+            _levelUI.ViewHint("Наконец-то я добрался до этого странного дома. Всё моё расследование указывает, что КНИГА древних рецептов снадобий спрятана в нём. Захожу в дом и заБираю её!!! Делов то ... ");
+            return;
+        }
         _player.transform.position = GameManager.Instance.currentPlayer.oldPosition;
         _player.transform.rotation = Quaternion.Euler(GameManager.Instance.currentPlayer.oldRotation);
     }
@@ -113,6 +117,7 @@ public class LevelControl : MonoBehaviour
                 if (quest.Faza < qs.Faza)
                 {
                     quest.UpdateFaza(qs.Faza);
+                    GameManager.Instance.currentPlayer.questStatus = ListQuestsToCsv();
                     GameManager.Instance.SaveGame();
                     return true;
                 }
