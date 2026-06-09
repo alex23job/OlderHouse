@@ -30,7 +30,7 @@ public class LevelControl : MonoBehaviour
         Vector3 delta = Vector3.zero - GameManager.Instance.currentPlayer.oldPosition;
         if (delta.magnitude < 0.1f)
         {
-            _levelUI.ViewHint("Наконец-то я добрался до этого странного дома. Всё моё расследование указывает, что КНИГА древних рецептов снадобий спрятана в нём. Захожу в дом и заБираю её!!! Делов то ... ");
+            _levelUI.ViewHint("Наконец-то я добрался до этого странного дома. Всё моё расследование указывает, что КНИГА древних рецептов снадобий спрятана в нём. Захожу в дом и забираю её!!! Делов то ... ");
             return;
         }
         _player.transform.position = GameManager.Instance.currentPlayer.oldPosition;
